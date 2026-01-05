@@ -25,6 +25,41 @@ public class App {
 
   dao.update(1L, 58000, 7);
   dao.delete(2L);
+
+  
+   //  SKILL 3 : HQL 
+   
+
+  System.out.println("\nProducts sorted by price (ASC):");
+  List<Product> asc = dao.sortByPriceAsc();
+  asc.forEach(pr ->
+  System.out.println(pr.getName() + " - " + pr.getPrice()));
+
+  System.out.println("\nProducts sorted by price (DESC):");
+  dao.sortByPriceDesc().forEach(pr ->
+  System.out.println(pr.getName() + " - " + pr.getPrice()));
+
+  System.out.println("\nFirst 3 products (Pagination):");
+  dao.firstThree().forEach(pr ->
+  System.out.println(pr.getName()));
+
+  System.out.println("\nTotal products: " + dao.countProducts());
+
+  
+   Object[] minMax = dao.minMaxPrice();
+  System.out.println("Min price: " + minMax[0]);
+  System.out.println("Max price: " + minMax[1]);
+  System.out.println("\nGROUP BY Description:");
+  dao.groupByDescription().forEach(o ->
+  System.out.println(o[0] + " -> " + o[1]));
+
+  System.out.println("\nPrice Range 2000 - 50000:");
+  dao.filterByPriceRange(2000, 50000)
+  .forEach(pr-> System.out.println(pr.getName()));
+
+  System.out.println("\nNames starting with 'L':");
+  dao.nameStartsWith("L").forEach(pr -> System.out.println(pr.getName())); 
+
   System.out.println("\nDONE");
  }
 }
